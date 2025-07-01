@@ -19,6 +19,12 @@ RUN cd /usr/bin && curl -s http://getcomposer.org/installer | php && ln -s /usr/
 # xdebugのインストール
 #RUN bash -c '[[ -n "$(pecl list | grep xdebug)" ]]\
 #  || (pecl install xdebug-3.1.6 && docker-php-ext-enable xdebug)'
+RUN pecl install xdebug \
+&& docker-php-ext-enable xdebug \
+&& echo "xdebug.mode=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+&& echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+&& echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#&& echo "xdebug.client_port=9004" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # コンテナ内で作業する際のカレンとディレクトリの指定
 WORKDIR /var/www/html

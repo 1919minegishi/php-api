@@ -35,6 +35,7 @@ services:
       - USER_ID
       - GROUP_NAME
       - GROUP_ID
+      - XDEBUG_MODE=debug # off or debug
     volumes:
         - ./:/var/www/html
         - ./docker/php/php.ini:/usr/local/etc/php/php.ini
